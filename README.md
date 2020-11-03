@@ -1,4 +1,4 @@
-# connectFour
+# Connect-Four
 
 A connect four program implemented using JavaScript and HTML.
 
