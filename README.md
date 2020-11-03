@@ -3,8 +3,6 @@
 A connect four program implemented using JavaScript and HTML.
 
 This code makes up Project 1 for EECS 368 at the University of Kansas
-
-  Connect Four :
   
     Makes a 2D array with all values initialized to zero. When the user types
     a number 1 - 7 on their keyboard, the 2D array gets updated with either a
