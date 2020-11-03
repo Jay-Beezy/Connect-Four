@@ -1,0 +1,43 @@
+<!--
+@author Jake Beesley
+@file index.html
+@date Last modified - 11/2/2020
+@brief
+
+  This code makes up Project 1 for EECS 368 at the University of Kansas
+
+  This file creates a 610 x 750 canvas, with a reset button that can be clicked
+  anytime to reset the elements of the canvas. Also includes instructions for
+  how to use the program.
+
+--->
+
+<HTML>
+  <body>
+    <canvas
+      id="myCanvas"
+      width="610"
+      height="750"
+      style="border: 1px solid black"></canvas>
+      <p></p>
+      <input type="button" id="resetbuttonTest"style ="background-color:red;color:black;width:130px; height:40px;font-family:Arial Black;"value="RESET">
+      <p></p>
+      <label id="instructions" style = "color:black; font-family:Arial Black;font-size:14px">
+        <b>
+          <p>
+            Instructions:
+          </p>
+          <p>
+            1.) Using your keyboard, enter a valid column number
+          </p>
+          <p>
+            2.) Hit [Reset] to start over
+          </p>
+          <p>
+            3.) Enjoy the game!
+          </p>
+        </b>
+      </label>
+  </body>
+  <script src="connectFour.js"></script>
+</HTML>
