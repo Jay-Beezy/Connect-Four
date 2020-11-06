@@ -250,7 +250,13 @@ function victoryRedPlayer(){
   context.stroke();
 
   context.fillStyle = 'red';
-  context.fillText("Player One (Red) Wins!", 50, 690);
+  context.fillText("Player One (Red) Wins!", 50, 675);
+
+  context.save();
+  context.font = "20pt  Calibri"
+  context.fillStyle = 'black';
+  context.fillText("Hit [RESET] to play again!", 175, 735);
+  context.restore();
 }
 
 //Graphic for yellow player victory
@@ -266,7 +272,13 @@ function victoryYellowPlayer(){
   context.stroke();
 
   context.fillStyle = 'yellow';
-  context.fillText("Player Two (Yellow) Wins!", 30, 690);
+  context.fillText("Player Two (Yellow) Wins!", 25, 675);
+
+  context.save();
+  context.font = "20pt  Calibri"
+  context.fillStyle = 'black';
+  context.fillText("Hit [RESET] to play again!", 175, 735);
+  context.restore();
 }
 
 //Graphic for tie
@@ -371,93 +383,95 @@ document.querySelector("body").addEventListener( "keydown", e => {
 );
 
 function render(){
-  for(let i = 0; i < 7; i++){
-    for(let j = 0; j < 6; j++){
-      if(boardArray[i][j] == 0){
-        context.beginPath();
-        context.fillStyle = 'white';
-        context.style = '3px';
-        context.arc((50+85*i), (50+85*j), 37, 0, 2 * Math.PI);
-        context.fill();
-        context.stroke();
-      }
-      else if(boardArray[i][j] == 1){
-        context.beginPath();
-        context.fillStyle = 'red';
-        context.style = '3px';
-        context.arc((50+85*i), (50+85*j), 37, 0, 2 * Math.PI);
-        context.fill();
-        context.stroke();
-      }
-      else if(boardArray[i][j] == 2){
-        context.beginPath();
-        context.fillStyle = 'yellow';
-        context.style = '3px';
-        context.arc((50+85*i), (50+85*j), 37, 0, 2 * Math.PI);
-        context.fill();
-        context.stroke();
+  do{
+    for(let i = 0; i < 7; i++){
+      for(let j = 0; j < 6; j++){
+        if(boardArray[i][j] == 0){
+          context.beginPath();
+          context.fillStyle = 'white';
+          context.style = '3px';
+          context.arc((50+85*i), (50+85*j), 37, 0, 2 * Math.PI);
+          context.fill();
+          context.stroke();
+        }
+        else if(boardArray[i][j] == 1){
+          context.beginPath();
+          context.fillStyle = 'red';
+          context.style = '3px';
+          context.arc((50+85*i), (50+85*j), 37, 0, 2 * Math.PI);
+          context.fill();
+          context.stroke();
+        }
+        else if(boardArray[i][j] == 2){
+          context.beginPath();
+          context.fillStyle = 'yellow';
+          context.style = '3px';
+          context.arc((50+85*i), (50+85*j), 37, 0, 2 * Math.PI);
+          context.fill();
+          context.stroke();
+        }
       }
     }
-  }
-  if(playerOneWinner == 1){
-    victoryRedPlayer(); //Calls red player win graphic
-  }
-  else if(playerTwoWinner == 1){
-    victoryYellowPlayer(); //Calls yellow player win graphic
-  }
-  else if(playerCounter == 42){
-    stalemate(); //Calls tie graphic
-  }
-  else if(playerCounter % 2 == 0){
-    //Graphic telling player one it is their turn
-    context.beginPath();
-    context.fillStyle = 'black';
-    context.fillRect(0,595,615,155);
-    context.stroke();
+    if(playerOneWinner == 1){
+      victoryRedPlayer(); //Calls red player win graphic
+    }
+    else if(playerTwoWinner == 1){
+      victoryYellowPlayer(); //Calls yellow player win graphic
+    }
+    else if(playerCounter == 42){
+      stalemate(); //Calls tie graphic
+    }
+    else if(playerCounter % 2 == 0){
+      //Graphic telling player one it is their turn
+      context.beginPath();
+      context.fillStyle = 'black';
+      context.fillRect(0,595,615,155);
+      context.stroke();
 
-    context.beginPath();
-    context.fillStyle = 'white';
-    context.fillRect(0,600,610,150);
-    context.stroke();
+      context.beginPath();
+      context.fillStyle = 'white';
+      context.fillRect(0,600,610,150);
+      context.stroke();
 
-    context.beginPath();
-    context.fillStyle = 'black';
-    context.fillRect(90,620,430,85);
-    context.stroke();
+      context.beginPath();
+      context.fillStyle = 'black';
+      context.fillRect(90,620,430,85);
+      context.stroke();
 
-    context.beginPath();
-    context.fillStyle = 'red';
-    context.fillRect(95,625,420,75);
-    context.stroke();
+      context.beginPath();
+      context.fillStyle = 'red';
+      context.fillRect(95,625,420,75);
+      context.stroke();
 
-    context.fillStyle = 'black';
-    context.fillText("Player One's turn!", 110, 680);
-  }
-  else if(playerCounter % 2 == 1){
-    //Graphic telling player two it is their turn
-    context.beginPath();
-    context.fillStyle = 'black';
-    context.fillRect(0,595,615,155);
-    context.stroke();
+      context.fillStyle = 'black';
+      context.fillText("Player One's turn!", 110, 680);
+    }
+    else if(playerCounter % 2 == 1){
+      //Graphic telling player two it is their turn
+      context.beginPath();
+      context.fillStyle = 'black';
+      context.fillRect(0,595,615,155);
+      context.stroke();
 
-    context.beginPath();
-    context.fillStyle = 'white';
-    context.fillRect(0,600,610,150);
-    context.stroke();
+      context.beginPath();
+      context.fillStyle = 'white';
+      context.fillRect(0,600,610,150);
+      context.stroke();
 
-    context.beginPath();
-    context.fillStyle = 'black';
-    context.fillRect(90,620,430,85);
-    context.stroke();
+      context.beginPath();
+      context.fillStyle = 'black';
+      context.fillRect(90,620,430,85);
+      context.stroke();
 
-    context.beginPath();
-    context.fillStyle = 'yellow';
-    context.fillRect(95,625,420,75);
-    context.stroke();
+      context.beginPath();
+      context.fillStyle = 'yellow';
+      context.fillRect(95,625,420,75);
+      context.stroke();
 
-    context.fillStyle = 'black';
-    context.fillText("Player Two's turn!", 110, 680);
-  }
+      context.fillStyle = 'black';
+      context.fillText("Player Two's turn!", 110, 680);
+    }
+  }while(checkWinner() == false)
 }
 
 var resetButton = document.getElementById('resetbuttonTest');
