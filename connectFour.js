@@ -1,7 +1,7 @@
 /*
 @author Jake Beesley
 @file connectFour.js
-@date 11/2/2020
+@date 11/30/2020
 @brief
 
   This code makes up Project 1 for EECS 368 at the University of Kansas
@@ -155,7 +155,7 @@ function checkWinner(){
   }
   else{
     console.log("Chipcount exceeded, GAME OVER");
-    return(false);
+    return(true);
   }
 }
 
