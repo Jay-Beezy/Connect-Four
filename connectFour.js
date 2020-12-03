@@ -1,7 +1,7 @@
 /*
 @author Jake Beesley
 @file connectFour.js
-@date 11/30/2020
+@date 12/3/2020
 @brief
 
   This code makes up Project 1 for EECS 368 at the University of Kansas
@@ -14,11 +14,11 @@
     at the corresponding column that the user selected.
 
     When a winner is found, the game ends, and the [RESET] button must be clicked
-    in order for another game to start. When another game starts, all values of
-    the 2D array are set back to 0, all counters (such as chip count or who was
-    declared the winner) are set to 0, and the players are able to play a brand
-    new game of Connect Four. The reset button can be clicked at any time to
-    reset the board.
+    in order for another game to start, or the SPACEBAR must be pressed.
+    When another game starts, all values of the 2D array are set back to 0,
+    all counters (such as chip count or who was declared the winner) are set to 0,
+    and the players are able to play a brand new game of Connect Four. The reset
+    button can be clicked at any time to reset the board, as with the SPACEBAR.
 
 */
 
@@ -123,32 +123,26 @@ function splatColumns(){
 function checkWinner(){
   if(playerCounter != 42){
     if(checkHorizontal() == 1){
-      console.log("Player one wins horizontally!");
       playerOneWinner = 1;
       return(true);
     }
     else if(checkHorizontal() == 2){
-      console.log("Player two wins horizontally!");
       playerTwoWinner = 1;
       return(true);
     }
     else if(checkVertical() == 1){
-      console.log("Player one wins vertically!");
       playerOneWinner = 1;
       return(true);
     }
     else if(checkVertical() == 2){
-      console.log("Player two wins vertically!");
       playerTwoWinner = 1;
       return(true);
     }
     else if(checkDiagonal() == 1){
-      console.log("Player one wins diagonally!");
       playerOneWinner = 1;
       return(true);
     }
     else if(checkDiagonal() == 2){
-      console.log("Player two wins diagonally!");
       playerTwoWinner = 1;
       return(true);
     }
@@ -332,6 +326,453 @@ function nextPlayer(){
   }
 }
 
+function chipOutlineWinner(){
+  if(playerOneWinner == 1){
+    //Part of check horizontal
+    for(let i = 0; i < 4; i++){
+      for(let j = 0; j < 6; j++){
+          if(boardArray[i][j] == 1 && boardArray[i+1][j] == 1 && boardArray[i+2][j] == 1 && boardArray[i+3][j] == 1){
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*i), (50+85*j), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'red';
+            context.style = '3px';
+            context.arc((50+85*i), (50+85*j), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i+1)), (50+85*j), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'red';
+            context.style = '3px';
+            context.arc((50+85*(i+1)), (50+85*j), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i+2)), (50+85*j), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'red';
+            context.style = '3px';
+            context.arc((50+85*(i+2)), (50+85*j), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i+3)), (50+85*j), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'red';
+            context.style = '3px';
+            context.arc((50+85*(i+3)), (50+85*j), 37, 0, 2 * Math.PI);
+            context.fill();
+          }
+      }
+    }
+    //Part of check vertical
+    for(let i = 0; i < 7; i++){
+      for(let j = 0; j < 3; j++){
+          if(boardArray[i][j] == 1 && boardArray[i][j+1] == 1 && boardArray[i][j+2] == 1 && boardArray[i][j+3] == 1){
+              //Draws winning outline
+              context.beginPath();
+              context.fillStyle = '#ffc800';
+              context.style = '3px';
+              context.arc((50+85*i), (50+85*j), 42, 0, 2 * Math.PI);
+              context.fill();
+              //Redraws the chip
+              context.beginPath();
+              context.fillStyle = 'red';
+              context.style = '3px';
+              context.arc((50+85*i), (50+85*j), 37, 0, 2 * Math.PI);
+              context.fill();
+              //Draws winning outline
+              context.beginPath();
+              context.fillStyle = '#ffc800';
+              context.style = '3px';
+              context.arc((50+85*i), (50+85*(j+1)), 42, 0, 2 * Math.PI);
+              context.fill();
+              //Redraws the chip
+              context.beginPath();
+              context.fillStyle = 'red';
+              context.style = '3px';
+              context.arc((50+85*i), (50+85*(j+1)), 37, 0, 2 * Math.PI);
+              context.fill();
+              //Draws winning outline
+              context.beginPath();
+              context.fillStyle = '#ffc800';
+              context.style = '3px';
+              context.arc((50+85*i), (50+85*(j+2)), 42, 0, 2 * Math.PI);
+              context.fill();
+              //Redraws the chip
+              context.beginPath();
+              context.fillStyle = 'red';
+              context.style = '3px';
+              context.arc((50+85*i), (50+85*(j+2)), 37, 0, 2 * Math.PI);
+              context.fill();
+              //Draws winning outline
+              context.beginPath();
+              context.fillStyle = '#ffc800';
+              context.style = '3px';
+              context.arc((50+85*i), (50+85*(j+3)), 42, 0, 2 * Math.PI);
+              context.fill();
+              //Redraws the chip
+              context.beginPath();
+              context.fillStyle = 'red';
+              context.style = '3px';
+              context.arc((50+85*i), (50+85*(j+3)), 37, 0, 2 * Math.PI);
+              context.fill();
+          }
+      }
+    }
+    //Part of right diagonal
+    for(let i = 3; i < 7; i++){
+      for(let j = 0; j < 3; j++){
+          if(boardArray[i][j] == 1 && boardArray[i-1][j+1] == 1 && boardArray[i-2][j+2] == 1 && boardArray[i-3][j+3] == 1){
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*i), (50+85*j), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'red';
+            context.style = '3px';
+            context.arc((50+85*i), (50+85*j), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i-1)), (50+85*(j+1)), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'red';
+            context.style = '3px';
+            context.arc((50+85*(i-1)), (50+85*(j+1)), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i-2)), (50+85*(j+2)), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'red';
+            context.style = '3px';
+            context.arc((50+85*(i-2)), (50+85*(j+2)), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i-3)), (50+85*(j+3)), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'red';
+            context.style = '3px';
+            context.arc((50+85*(i-3)), (50+85*(j+3)), 37, 0, 2 * Math.PI);
+            context.fill();
+          }
+      }
+    }
+    //Part of left diagonal
+    for(let i = 3; i < 7; i++){
+      for(let j = 3; j < 6; j++){
+          if(boardArray[i][j] == 1 && boardArray[i-1][j-1] == 1 && boardArray[i-2][j-2] == 1 && boardArray[i-3][j-3] == 1){
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*i), (50+85*j), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'red';
+            context.style = '3px';
+            context.arc((50+85*i), (50+85*j), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i-1)), (50+85*(j-1)), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'red';
+            context.style = '3px';
+            context.arc((50+85*(i-1)), (50+85*(j-1)), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i-2)), (50+85*(j-2)), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'red';
+            context.style = '3px';
+            context.arc((50+85*(i-2)), (50+85*(j-2)), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i-3)), (50+85*(j-3)), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'red';
+            context.style = '3px';
+            context.arc((50+85*(i-3)), (50+85*(j-3)), 37, 0, 2 * Math.PI);
+            context.fill();
+          }
+      }
+    }
+  }
+  if(playerTwoWinner == 1){
+    //Part of check horizontal
+    for(let i = 0; i < 4; i++){
+      for(let j = 0; j < 6; j++){
+          if(boardArray[i][j] == 2 && boardArray[i+1][j] == 2 && boardArray[i+2][j] == 2 && boardArray[i+3][j] == 2){
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*i), (50+85*j), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'yellow';
+            context.style = '3px';
+            context.arc((50+85*i), (50+85*j), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i+1)), (50+85*j), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'yellow';
+            context.style = '3px';
+            context.arc((50+85*(i+1)), (50+85*j), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i+2)), (50+85*j), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'yellow';
+            context.style = '3px';
+            context.arc((50+85*(i+2)), (50+85*j), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i+3)), (50+85*j), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'yellow';
+            context.style = '3px';
+            context.arc((50+85*(i+3)), (50+85*j), 37, 0, 2 * Math.PI);
+            context.fill();
+          }
+      }
+    }
+    //Part of check vertical
+    for(let i = 0; i < 7; i++){
+      for(let j = 0; j < 3; j++){
+          if(boardArray[i][j] == 2 && boardArray[i][j+1] == 2 && boardArray[i][j+2] == 2 && boardArray[i][j+3] == 2){
+              //Draws winning outline
+              context.beginPath();
+              context.fillStyle = '#ffc800';
+              context.style = '3px';
+              context.arc((50+85*i), (50+85*j), 42, 0, 2 * Math.PI);
+              context.fill();
+              //Redraws the chip
+              context.beginPath();
+              context.fillStyle = 'yellow';
+              context.style = '3px';
+              context.arc((50+85*i), (50+85*j), 37, 0, 2 * Math.PI);
+              context.fill();
+              //Draws winning outline
+              context.beginPath();
+              context.fillStyle = '#ffc800';
+              context.style = '3px';
+              context.arc((50+85*i), (50+85*(j+1)), 42, 0, 2 * Math.PI);
+              context.fill();
+              //Redraws the chip
+              context.beginPath();
+              context.fillStyle = 'yellow';
+              context.style = '3px';
+              context.arc((50+85*i), (50+85*(j+1)), 37, 0, 2 * Math.PI);
+              context.fill();
+              //Draws winning outline
+              context.beginPath();
+              context.fillStyle = '#ffc800';
+              context.style = '3px';
+              context.arc((50+85*i), (50+85*(j+2)), 42, 0, 2 * Math.PI);
+              context.fill();
+              //Redraws the chip
+              context.beginPath();
+              context.fillStyle = 'yellow';
+              context.style = '3px';
+              context.arc((50+85*i), (50+85*(j+2)), 37, 0, 2 * Math.PI);
+              context.fill();
+              //Draws winning outline
+              context.beginPath();
+              context.fillStyle = '#ffc800';
+              context.style = '3px';
+              context.arc((50+85*i), (50+85*(j+3)), 42, 0, 2 * Math.PI);
+              context.fill();
+              //Redraws the chip
+              context.beginPath();
+              context.fillStyle = 'yellow';
+              context.style = '3px';
+              context.arc((50+85*i), (50+85*(j+3)), 37, 0, 2 * Math.PI);
+              context.fill();
+          }
+      }
+    }
+    //Part of right diagonal
+    for(let i = 3; i < 7; i++){
+      for(let j = 0; j < 3; j++){
+          if(boardArray[i][j] == 2 && boardArray[i-1][j+1] == 2 && boardArray[i-2][j+2] == 2 && boardArray[i-3][j+3] == 2){
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*i), (50+85*j), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'yellow';
+            context.style = '3px';
+            context.arc((50+85*i), (50+85*j), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i-1)), (50+85*(j+1)), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'yellow';
+            context.style = '3px';
+            context.arc((50+85*(i-1)), (50+85*(j+1)), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i-2)), (50+85*(j+2)), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'yellow';
+            context.style = '3px';
+            context.arc((50+85*(i-2)), (50+85*(j+2)), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i-3)), (50+85*(j+3)), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'yellow';
+            context.style = '3px';
+            context.arc((50+85*(i-3)), (50+85*(j+3)), 37, 0, 2 * Math.PI);
+            context.fill();
+          }
+      }
+    }
+    //Part of left diagonal
+    for(let i = 3; i < 7; i++){
+      for(let j = 3; j < 6; j++){
+          if(boardArray[i][j] == 2 && boardArray[i-1][j-1] == 2 && boardArray[i-2][j-2] == 2 && boardArray[i-3][j-3] == 2){
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*i), (50+85*j), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'yellow';
+            context.style = '3px';
+            context.arc((50+85*i), (50+85*j), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i-1)), (50+85*(j-1)), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'yellow';
+            context.style = '3px';
+            context.arc((50+85*(i-1)), (50+85*(j-1)), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i-2)), (50+85*(j-2)), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'yellow';
+            context.style = '3px';
+            context.arc((50+85*(i-2)), (50+85*(j-2)), 37, 0, 2 * Math.PI);
+            context.fill();
+            //Draws winning outline
+            context.beginPath();
+            context.fillStyle = '#ffc800';
+            context.style = '3px';
+            context.arc((50+85*(i-3)), (50+85*(j-3)), 42, 0, 2 * Math.PI);
+            context.fill();
+            //Redraws the chip
+            context.beginPath();
+            context.fillStyle = 'yellow';
+            context.style = '3px';
+            context.arc((50+85*(i-3)), (50+85*(j-3)), 37, 0, 2 * Math.PI);
+            context.fill();
+          }
+      }
+    }
+  }
+}
+
 //Circle and rectangle functionality learned from w3schools.com
 //Uses canvas arc method to draw circles at their respective location
 //Uses canvas fillRect method to draw a rectangle behind the squares
@@ -414,9 +855,11 @@ function render(){
     }
     if(playerOneWinner == 1){
       victoryRedPlayer(); //Calls red player win graphic
+      chipOutlineWinner();
     }
     else if(playerTwoWinner == 1){
       victoryYellowPlayer(); //Calls yellow player win graphic
+      chipOutlineWinner();
     }
     else if(playerCounter == 42){
       stalemate(); //Calls tie graphic
@@ -474,11 +917,18 @@ function render(){
   }while(checkWinner() == false)
 }
 
-var resetButton = document.getElementById('resetbuttonTest');
+var resetButton = document.getElementById('resetButton');
   resetButton.addEventListener("click", (e) => {
-    console.clear();
-    console.log("RESET");
     resetBoard();
+});
+
+//Ability to use the spacebar with an eventListener, as well as preventing the page from scrolling, found on
+//StackOverflow.com @ https://stackoverflow.com/questions/22559830/html-prevent-space-bar-from-scrolling-page
+document.querySelector("body").addEventListener( "keydown", e => {
+  if(e.keyCode == 32 && e.target == document.body){ //32 => spacebar code
+    e.preventDefault(); //Prevents the page from scrolling when the spacebar is pressed
+    resetBoard();
+  }
 });
 
 function splat(t) {
